@@ -1,7 +1,7 @@
-# Личный проект «YetiCave» 
+﻿# Личный проект «YetiCave» 
 
-* Студент: [Опознанный  Кот](https://up.htmlacademy.ru/php/3/user/542347).
-* Наставник: `Неизвестно`.
+* Студент: [JaysonBRN](https://up.htmlacademy.ru/php/3/user/542347).
+* Наставник: `Игорь Закиров`.
 
 ---
 
