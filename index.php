@@ -7,17 +7,16 @@ $user_avatar = 'img/user.jpg';
 // устанавливаем часовой пояс в Московское время
 date_default_timezone_set('Europe/Moscow');
 
-// записать в эту переменную оставшееся время в этом формате (ЧЧ:ММ)
-$lot_time_remaining = "00:00";
-
 // временная метка для полночи следующего дня
 $tomorrow = strtotime('tomorrow midnight');
 
 // временная метка для настоящего времени
 $now = strtotime('now');
 
-// далее нужно вычислить оставшееся время до начала следующих суток и записать его в переменную $lot_time_remaining
-$lot_time_remaining = gmdate("H:i:s", $tomorrow - $now);
+$hours = ($tomorrow - $now) % 3600 ;
+$hoursFull = floor(($tomorrow - $now) / 3600) ;
+$minutes = floor($hours / 60) ;
+$lot_time_remaining = $hoursFull . ':' . $minutes ;
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -40,12 +39,9 @@ $lot_time_remaining = gmdate("H:i:s", $tomorrow - $now);
             <input class="main-header__search-btn" type="submit" name="find" value="Найти">
         </form>
         <a class="main-header__add-lot button" href="add-lot.html">Добавить лот</a>
-
-<!--Начало задания -->
-
-         <nav class="user-menu">
+        <nav class="user-menu">
             <?php 
-            if ($is_auth == true) { 
+            if ($is_auth === true) { 
             ?> 
                 <div class="$user-menu__image">
                     <img src= "<?=$user_avatar; ?>" width="40" height="40" alt="Пользователь">
@@ -65,8 +61,6 @@ $lot_time_remaining = gmdate("H:i:s", $tomorrow - $now);
                 </ul>
             <?php }
             ?>
- <!-- здесь должен быть PHP код для показа аватара пользователя -->
-
         </nav>
     </div>
 </header>
@@ -113,7 +107,7 @@ $lot_time_remaining = gmdate("H:i:s", $tomorrow - $now);
                             <span class="lot__amount">Стартовая цена</span>
                             <span class="lot__cost">10 999<b class="rub">р</b></span>
                         </div>
-                        <div class="lot__timer timer">
+                        <div class="lot__timer timer">                   
                             <?=$lot_time_remaining;?>
                         </div>
                     </div>
