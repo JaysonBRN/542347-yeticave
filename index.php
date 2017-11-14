@@ -16,36 +16,36 @@ $now = strtotime('now');
 $hours = ($tomorrow - $now) % 3600 ;
 $hoursFull = floor(($tomorrow - $now) / 3600) ;
 $minutes = floor($hours / 60) ;
-$lot_time_remaining = $hoursFull . ':' . $minutes ;
+$lot_time_remaining = sprintf('%02d', $hoursFull) . ':' . sprintf('%02d', $minutes) ;
 $categories = [
                 [
                     'name' => 'Доски и лыжи',
-                    'cssClass' => 'promo__item promo__item--boards'
+                    'cssClass' => 'boards'
                 ],
                 [
                     'name' => 'Крепления',
-                    'cssClass' => 'promo__item promo__item--attachment'
+                    'cssClass' => 'attachment'
                 ],
                 [
                     'name' => 'Ботинки',
-                    'cssClass' => 'promo__item promo__item--boots'
+                    'cssClass' => 'boots'
                 ],
                 [
                     'name' => 'Одежда',
-                    'cssClass' => 'promo__item promo__item--clothing'
+                    'cssClass' => 'clothing'
                 ],
                 [
                     'name' => 'Инструменты',
-                    'cssClass' => 'promo__item promo__item--tools'
+                    'cssClass' => 'tools'
                 ],
                 [
                     'name' => 'Разное',
-                    'cssClass' => 'promo__item promo__item--other'
+                    'cssClass' => 'other'
                 ]
             ];
                 
 
-$acategories = [
+$lots = [
                 [
                         'name' => '2014 Rossignol District Snowboard',
                         'Categorie' => 'Доски и лыжи',
@@ -138,7 +138,7 @@ $acategories = [
         <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
         <ul class="promo__list">
             <?php foreach ($categories as $k => $val): ?>
-            <li class="<?=$val['cssClass']; ?>">
+            <li class="promo__item promo__item--<?=$val['cssClass']; ?>">
                 <a class="promo__link" href="all-lots.html"><?=$val['name'];?></a>
             </li>
             <?php endforeach; ?>
@@ -149,18 +149,18 @@ $acategories = [
             <h2>Открытые лоты</h2>
         </div>
         <ul class="lots__list">
-            <?php foreach ($acategories as $key => $value): ?>
+            <?php foreach ($lots as $key => $category): ?>
             <li class="lots__item lot">
                 <div class="lot__image">
-                    <img src="<?=$value['pic']; ?>" width="350" height="260" alt="">
+                    <img src="<?=$category['pic']; ?>" width="350" height="260" alt="">
                 </div>
                 <div class="lot__info">
-                    <span class="lot__category"><?=$value['Categorie']; ?></span>
-                    <h3 class="lot__title"><a class="text-link" href="lot.html"><?=$value['name']; ?></a></h3>
+                    <span class="lot__category"><?=$category['Categorie']; ?></span>
+                    <h3 class="lot__title"><a class="text-link" href="lot.html"><?=$category['name']; ?></a></h3>
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <span class="lot__cost"><?=$value['price']; ?><b class="rub">р</b></span>
+                            <span class="lot__cost"><?=$category['price']; ?><b class="rub">р</b></span>
                         </div>
                         <div class="lot__timer timer">                   
                             <?=$lot_time_remaining;?>
