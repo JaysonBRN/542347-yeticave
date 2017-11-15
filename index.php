@@ -16,7 +16,74 @@ $now = strtotime('now');
 $hours = ($tomorrow - $now) % 3600 ;
 $hoursFull = floor(($tomorrow - $now) / 3600) ;
 $minutes = floor($hours / 60) ;
-$lot_time_remaining = $hoursFull . ':' . $minutes ;
+$lot_time_remaining = sprintf('%02d', $hoursFull) . ':' . sprintf('%02d', $minutes) ;
+$categories = [
+                [
+                    'name' => 'Доски и лыжи',
+                    'cssClass' => 'boards'
+                ],
+                [
+                    'name' => 'Крепления',
+                    'cssClass' => 'attachment'
+                ],
+                [
+                    'name' => 'Ботинки',
+                    'cssClass' => 'boots'
+                ],
+                [
+                    'name' => 'Одежда',
+                    'cssClass' => 'clothing'
+                ],
+                [
+                    'name' => 'Инструменты',
+                    'cssClass' => 'tools'
+                ],
+                [
+                    'name' => 'Разное',
+                    'cssClass' => 'other'
+                ]
+            ];
+                
+
+$lots = [
+                [
+                        'name' => '2014 Rossignol District Snowboard',
+                        'Categorie' => 'Доски и лыжи',
+                        'price' => '10999',
+                        'pic' => '/img/lot-1.jpg'
+                    ],
+                 [
+                        'name' =>'DC Ply Mens 2016/2017 Snowboard',
+                        'Categorie' => 'Доски и лыжи',
+                        'price' => '159999',
+                        'pic' => 'img/lot-2.jpg'
+                    ],
+                 [
+                        'name' =>'Крепления Union Contact Pro 2015 года размер L/XL',
+                        'Categorie' => 'Крепления',
+                        'price' => '8000',
+                        'pic' => 'img/lot-3.jpg'
+                    ],
+                [
+                        'name' =>'Ботинки для сноуборда DC Mutiny Charocal',
+                        'Categorie' => 'Ботинки',
+                        'price' => '10999',
+                        'pic' => 'img/lot-4.jpg'
+                    ],
+                [
+                        'name' =>'Куртка для сноуборда DC Mutiny Charocal',
+                        'Categorie' => 'Одежда',
+                        'price' => '7500',
+                        'pic' => 'img/lot-5.jpg'
+                    ],
+                [
+                        'name' =>'Маска Oakley Canopy',
+                        'Categorie' => 'Разное',
+                        'price' => '5400',
+                        'pic' => 'img/lot-6.jpg'
+                    ]
+                ]; 
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -70,24 +137,11 @@ $lot_time_remaining = $hoursFull . ':' . $minutes ;
         <h2 class="promo__title">Нужен стафф для катки?</h2>
         <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
         <ul class="promo__list">
-            <li class="promo__item promo__item--boards">
-                <a class="promo__link" href="all-lots.html">Доски и лыжи</a>
+            <?php foreach ($categories as $k => $val): ?>
+            <li class="promo__item promo__item--<?=$val['cssClass']; ?>">
+                <a class="promo__link" href="all-lots.html"><?=$val['name'];?></a>
             </li>
-            <li class="promo__item promo__item--attachment">
-                <a class="promo__link" href="all-lots.html">Крепления</a>
-            </li>
-            <li class="promo__item promo__item--boots">
-                <a class="promo__link" href="all-lots.html">Ботинки</a>
-            </li>
-            <li class="promo__item promo__item--clothing">
-                <a class="promo__link" href="all-lots.html">Одежда</a>
-            </li>
-            <li class="promo__item promo__item--tools">
-                <a class="promo__link" href="all-lots.html">Инструменты</a>
-            </li>
-            <li class="promo__item promo__item--other">
-                <a class="promo__link" href="all-lots.html">Разное</a>
-            </li>
+            <?php endforeach; ?>
         </ul>
     </section>
     <section class="lots">
@@ -95,17 +149,18 @@ $lot_time_remaining = $hoursFull . ':' . $minutes ;
             <h2>Открытые лоты</h2>
         </div>
         <ul class="lots__list">
+            <?php foreach ($lots as $key => $category): ?>
             <li class="lots__item lot">
                 <div class="lot__image">
-                    <img src="img/lot-1.jpg" width="350" height="260" alt="Сноуборд">
+                    <img src="<?=$category['pic']; ?>" width="350" height="260" alt="">
                 </div>
                 <div class="lot__info">
-                    <span class="lot__category">Доски и лыжи</span>
-                    <h3 class="lot__title"><a class="text-link" href="lot.html">2014 Rossignol District Snowboard</a></h3>
+                    <span class="lot__category"><?=$category['Categorie']; ?></span>
+                    <h3 class="lot__title"><a class="text-link" href="lot.html"><?=$category['name']; ?></a></h3>
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <span class="lot__cost">10 999<b class="rub">р</b></span>
+                            <span class="lot__cost"><?=$category['price']; ?><b class="rub">р</b></span>
                         </div>
                         <div class="lot__timer timer">                   
                             <?=$lot_time_remaining;?>
@@ -113,6 +168,7 @@ $lot_time_remaining = $hoursFull . ':' . $minutes ;
                     </div>
                 </div>
             </li>
+        <?php endforeach; ?>
         </ul>
     </section>
 </main>
