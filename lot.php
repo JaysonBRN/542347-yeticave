@@ -1,6 +1,15 @@
 <?php
 
-// ставки пользователей, которыми надо заполнить таблицу
+function timeform($datebet) {
+    $timediff = time()- $datebet ;
+	if ($timediff > 86400) {
+		return date("d. m. y. H:i:s", $datebet);
+	}
+	if ($timediff < 3600) {
+		return ($timediff / 60) . ' минут назад';
+	}
+	return ($timediff / 3600) . ' часов назад';
+} 
 $bets = [
     ['name' => 'Иван', 'price' => 11500, 'ts' => strtotime('-' . rand(1, 50) .' minute')],
     ['name' => 'Константин', 'price' => 11000, 'ts' => strtotime('-' . rand(1, 18) .' hour')],
@@ -110,13 +119,15 @@ $bets = [
                 <div class="history">
                     <h3>История ставок (<span>4</span>)</h3>
                     <!-- заполните эту таблицу данными из массива $bets-->
+                    <?php foreach ($bets as $key => $bet): ?>
                     <table class="history__list">
                         <tr class="history__item">
-                            <td class="history__name"><!-- имя автора--></td>
-                            <td class="history__price"><!-- цена--> р</td>
-                            <td class="history__time"><!-- дата в человеческом формате--></td>
+                            <td class="history__name"><?=$bet['name'];?></td>
+                            <td class="history__price"><?=$bet['price'];?></td>
+                            <td class="history__time"><?=timeform ($bet['ts']);?></td>
                         </tr>
                     </table>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
