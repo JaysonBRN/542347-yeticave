@@ -1,17 +1,14 @@
 <?php
 
-function timeform ($datebet) {
-	$now = time();
-    $timediff = $now - $datebet ;
+function timeform($datebet) {
+    $timediff = time()- $datebet ;
 	if ($timediff > 86400) {
-		return date("d, m, y, H:i:s", $datebet);
+		return date("d. m. y. H:i:s", $datebet);
 	}
 	if ($timediff < 3600) {
-		return ($timediff / 60) . ' минут назад' ;
+		return ($timediff / 60) . ' минут назад';
 	}
-	else {
-	 return ($timediff / 3600) . 'часов назад' ;
-	}
+	return ($timediff / 3600) . ' часов назад';
 } 
 $bets = [
     ['name' => 'Иван', 'price' => 11500, 'ts' => strtotime('-' . rand(1, 50) .' minute')],
@@ -130,7 +127,7 @@ $bets = [
                             <td class="history__time"><?=timeform ($bet['ts']);?></td>
                         </tr>
                     </table>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
