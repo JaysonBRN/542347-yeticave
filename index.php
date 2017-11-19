@@ -84,7 +84,7 @@ $lots = [
                     ]
                 ];
 require_once ('function.php');
-$pagecontent = shablon ('./templates/index.php', ['categories' => $categories, 'lots' => $lots, 'lot_time_remaining' => $lot_time_remaining]);
-$layoutcontent = shablon ('layout.php', ['content' => $pagecontent, 'title' => 'yeticave - Главная', 'user_name' => $user_name, 'user_avatar' => $user_avatar]);
+$pagecontent = shablon ('templates/index.php', ['categories' => $categories, 'lots' => $lots, 'lot_time_remaining' => $lot_time_remaining]);
+$layoutcontent = shablon ('templates/layout.php', ['content' => $pagecontent, 'title' => 'yeticave - Главная', 'is_auth' => $is_auth, 'user_name' => $user_name, 'user_avatar' => $user_avatar]);
 print ($layoutcontent);
 ?>
