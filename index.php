@@ -43,48 +43,11 @@ $categories = [
                     'cssClass' => 'other'
                 ]
             ];
-                
-
-$lots = [
-                [
-                        'name' => '2014 Rossignol District Snowboard',
-                        'Categorie' => 'Доски и лыжи',
-                        'price' => '10999',
-                        'pic' => '/img/lot-1.jpg'
-                    ],
-                 [
-                        'name' =>'DC Ply Mens 2016/2017 Snowboard',
-                        'Categorie' => 'Доски и лыжи',
-                        'price' => '159999',
-                        'pic' => 'img/lot-2.jpg'
-                    ],
-                 [
-                        'name' =>'Крепления Union Contact Pro 2015 года размер L/XL',
-                        'Categorie' => 'Крепления',
-                        'price' => '8000',
-                        'pic' => 'img/lot-3.jpg'
-                    ],
-                [
-                        'name' =>'Ботинки для сноуборда DC Mutiny Charocal',
-                        'Categorie' => 'Ботинки',
-                        'price' => '10999',
-                        'pic' => 'img/lot-4.jpg'
-                    ],
-                [
-                        'name' =>'Куртка для сноуборда DC Mutiny Charocal',
-                        'Categorie' => 'Одежда',
-                        'price' => '7500',
-                        'pic' => 'img/lot-5.jpg'
-                    ],
-                [
-                        'name' =>'Маска Oakley Canopy',
-                        'Categorie' => 'Разное',
-                        'price' => '5400',
-                        'pic' => 'img/lot-6.jpg'
-                    ]
-                ];
+require_once ('data.php');
 require_once ('function.php');
+
+
 $pagecontent = shablon ('templates/index.php', ['categories' => $categories, 'lots' => $lots, 'lot_time_remaining' => $lot_time_remaining]);
 $layoutcontent = shablon ('templates/layout.php', ['content' => $pagecontent, 'title' => 'yeticave - Главная', 'is_auth' => $is_auth, 'user_name' => $user_name, 'user_avatar' => $user_avatar]);
 print ($layoutcontent);
-?>
+
