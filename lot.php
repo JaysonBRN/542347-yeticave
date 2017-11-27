@@ -1,5 +1,6 @@
 <?php
-
+require_once ('data.php');
+require_once ('function.php');
 function timeform($datebet) {
     $timediff = time() - $datebet;
 	if ($timediff > 86400) {
@@ -16,13 +17,30 @@ $bets = [
     ['name' => 'Евгений', 'price' => 10500, 'ts' => strtotime('-' . rand(25, 50) .' hour')],
     ['name' => 'Семён', 'price' => 10000, 'ts' => strtotime('last week')]
 ];
+$lot = null;
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    foreach ($lots as $item) {
+        if ($item['id'] == $id) {
+            $lot = $item;
+            break;
+        }
+    }
+
+}
+if (!$lot) {
+    http_response_code (404);
+};
 ?>
 
 <!DOCTYPE html>
 <html lang="ru">
+<?php if (isset($lot)): ?>
 <head>
     <meta charset="UTF-8">
-    <title>DC Ply Mens 2016/2017 Snowboard</title>
+    <title><?=$lot['name'];?></title>
     <link href="css/normalize.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </head>
@@ -76,13 +94,13 @@ $bets = [
         </ul>
     </nav>
     <section class="lot-item container">
-        <h2>DC Ply Mens 2016/2017 Snowboard</h2>
+        <h2><?=$lot['name'];?></h2>
         <div class="lot-item__content">
             <div class="lot-item__left">
                 <div class="lot-item__image">
-                    <img src="img/lot-image.jpg" width="730" height="548" alt="Сноуборд">
+                    <img src="<?=$lot['pic'];?>" width="730" height="548" alt="Сноуборд">
                 </div>
-                <p class="lot-item__category">Категория: <span>Доски и лыжи</span></p>
+                <p class="lot-item__category">Категория: <span><?=$lot['Categorie'];?></span></p>
                 <p class="lot-item__description">Легкий маневренный сноуборд, готовый дать жару в любом парке, растопив
                     снег
                     мощным щелчкоми четкими дугами. Стекловолокно Bi-Ax, уложенное в двух направлениях, наделяет этот
@@ -102,7 +120,7 @@ $bets = [
                     <div class="lot-item__cost-state">
                         <div class="lot-item__rate">
                             <span class="lot-item__amount">Текущая цена</span>
-                            <span class="lot-item__cost">11 500</span>
+                            <span class="lot-item__cost"><?=$lot['price'];?></span>
                         </div>
                         <div class="lot-item__min-cost">
                             Мин. ставка <span>12 000 р</span>
@@ -195,4 +213,7 @@ $bets = [
 </footer>
 
 </body>
+<?php else: ?>
+    <h1 style="color: black">Лот с этим ID не найден</h1>
+<?php endif; ?>
 </html>
