@@ -1,6 +1,6 @@
 <?php
 
-function shablon($waytofile, $arrayfile) {
+function include_template($waytofile, $arrayfile) {
 	
 	if (file_exists($waytofile)) {
 		ob_start();
