@@ -1,34 +1,12 @@
-<nav class="nav">
-    <ul class="nav__list container">
-        <li class="nav__item">
-            <a href="">Доски и лыжи</a>
-        </li>
-        <li class="nav__item">
-            <a href="">Крепления</a>
-        </li>
-        <li class="nav__item">
-            <a href="">Ботинки</a>
-        </li>
-        <li class="nav__item">
-            <a href="">Одежда</a>
-        </li>
-        <li class="nav__item">
-            <a href="">Инструменты</a>
-        </li>
-        <li class="nav__item">
-            <a href="">Разное</a>
-        </li>
-    </ul>
-</nav>
+<?= include_template( 'templates/nav.php', [ 'categories' => $categories ] ) ?>
 <section class="lot-item container">
-    <?php if (isset($lot)): ?>
     <h2><?=htmlspecialchars($lot['lot-name']);?></h2>
     <div class="lot-item__content">
         <div class="lot-item__left">
             <div class="lot-item__image">
-                <img src="img/<?=$lot['path'];?>" width="730" height="548" alt="Сноуборд">
+                <img src="<?=$lot['lot-img'];?>" width="730" height="548" alt="<?= $lot['lot-name'] ?>">
             </div>
-            <p class="lot-item__category">Категория: <span><?=$lot['category'];?></span></p>
+            <p class="lot-item__category">Категория: <span><?= getCategoryById( $lot['category'], $categories )['name'];?></span></p>
             <p class="lot-item__description"><?=htmlspecialchars($lot['description']);?></p>
         </div>
         <div class="lot-item__right">
@@ -54,16 +32,60 @@
                 </form>
             </div>
             <div class="history">
-                <h3>История ставок (<span>4</span>)</h3>
-                    <table class="history__list">
-                        <tr class="history__item">
-                            <td class="history__name"></td>
-                            <td class="history__price"></td>
-                            <td class="history__time"></td>
-                        </tr>
-                    </table>
+                <h3>История ставок (<span>10</span>)</h3>
+                <table class="history__list">
+                    <tr class="history__item">
+                        <td class="history__name">Иван</td>
+                        <td class="history__price">10 999 р</td>
+                        <td class="history__time">5 минут назад</td>
+                    </tr>
+                    <tr class="history__item">
+                        <td class="history__name">Константин</td>
+                        <td class="history__price">10 999 р</td>
+                        <td class="history__time">20 минут назад</td>
+                    </tr>
+                    <tr class="history__item">
+                        <td class="history__name">Евгений</td>
+                        <td class="history__price">10 999 р</td>
+                        <td class="history__time">Час назад</td>
+                    </tr>
+                    <tr class="history__item">
+                        <td class="history__name">Игорь</td>
+                        <td class="history__price">10 999 р</td>
+                        <td class="history__time">19.03.17 в 08:21</td>
+                    </tr>
+                    <tr class="history__item">
+                        <td class="history__name">Енакентий</td>
+                        <td class="history__price">10 999 р</td>
+                        <td class="history__time">19.03.17 в 13:20</td>
+                    </tr>
+                    <tr class="history__item">
+                        <td class="history__name">Семён</td>
+                        <td class="history__price">10 999 р</td>
+                        <td class="history__time">19.03.17 в 12:20</td>
+                    </tr>
+                    <tr class="history__item">
+                        <td class="history__name">Илья</td>
+                        <td class="history__price">10 999 р</td>
+                        <td class="history__time">19.03.17 в 10:20</td>
+                    </tr>
+                    <tr class="history__item">
+                        <td class="history__name">Енакентий</td>
+                        <td class="history__price">10 999 р</td>
+                        <td class="history__time">19.03.17 в 13:20</td>
+                    </tr>
+                    <tr class="history__item">
+                        <td class="history__name">Семён</td>
+                        <td class="history__price">10 999 р</td>
+                        <td class="history__time">19.03.17 в 12:20</td>
+                    </tr>
+                    <tr class="history__item">
+                        <td class="history__name">Илья</td>
+                        <td class="history__price">10 999 р</td>
+                        <td class="history__time">19.03.17 в 10:20</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
-    <?php endif; ?>
 </section>
