@@ -1,15 +1,17 @@
-    <?= include_template( 'templates/nav.php', [ 'categories' => $categories ] ) ?>
+<?= include_template( 'templates/nav.php', [ 'categories' => $categories ] ) ?>
     <form class="form form--add-lot container <?= count( $errors ) ? 'form--invalid' : '' ?>" action="add.php" method="post" enctype="multipart/form-data">
         <h2>Добавление лота</h2>
-        <?php $classname = isset($errors['lot-name']) ? 'form__item--invalid': '';
+
+        <div class="form__container-two">
+            <?php $classname = isset($errors['lot-name']) ? 'form__item--invalid': '';
             $value = isset($lot['lot-name']) ? $lot['lot-name']: ''; ?>
-        <div class="form__container-two <?=$classname;?>">
-            <div class="form__item">
+            <div class="form__item <?=$classname;?>">
                 <label for="lot-name">Наименование</label>
                 <input value="<?=$value;?>" id="lot-name" type="text" name="lot-name" placeholder="Введите наименование лота">
                 <span class="form__error"><?= isset( $errors['lot-name'] ) ? $errors['lot-name'] : 'Введите наименование лота' ?></span>
             </div>
-            <div class="form__item">
+            <?php $classname = isset($errors['category']) ? 'form__item--invalid': ''; ?>
+            <div class="form__item <?=$classname?>">
                 <label for="category">Категория</label>
                 <select id="category" name="category">
                     <option value="-1">Выберите категорию</option>

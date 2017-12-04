@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors = [];
     foreach ($_POST as $field => $value) {
         if (in_array($field, $required)) {
-            if (!$value) {
+            if ($value == '') {
                 $errors[$field] = 'Это поле надо заполнить';
             }
         }
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $lot['description'] = $_POST['description'];
     $lot['lot-rate'] = (int)$_POST['lot-rate'];
     $lot['lot-step'] = (int)$_POST['lot-step'];
-    $lot['lot-date'] = (int)$_POST['lot-date'];
+    $lot['lot-date'] = $_POST['lot-date'];
 
     if (count($errors)) {
         $pagecontent = include_template('templates/add.php', ['lot' => $lot, 'categories' => $categories, 'errors' => $errors]);

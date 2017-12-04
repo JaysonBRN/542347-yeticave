@@ -2,7 +2,7 @@
 
 /**
  * @param string $waytofile
- * @param string $arrayfile
+ * @param array $arrayfile
  * @return string
  */
 function include_template($waytofile, $arrayfile) {
