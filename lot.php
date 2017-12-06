@@ -14,4 +14,4 @@ if (!$lot) {
     $pagecontent = include_template( 'templates/lot.php', [ 'lot' => $lot, 'categories' => $categories ] );
 }
 
-echo include_template ('templates/layout.php', ['content' => $pagecontent, 'title' => 'yeticave - Главная', 'is_auth' => $is_auth, 'user_name' => $user_name, 'user_avatar' => $user_avatar]);
+echo include_template ('templates/layout.php', ['content' => $pagecontent, 'title' => 'yeticave - Главная']);
