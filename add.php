@@ -1,6 +1,11 @@
 <?php
 require_once( 'app/init.php' );
 
+if (!isset($_SESSION['user'])) {
+    http_response_code(403);
+    exit();
+}
+
 $lot = [
     'id' => null,
     'lot-name' => null,
@@ -74,4 +79,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 else {
     $pagecontent = include_template('templates/add.php', [ 'lot' => $lot, 'categories' => $categories, 'errors' => [] ]);
 }
-echo include_template('templates/layout.php', ['content' => $pagecontent, 'title' => 'yeticave - Добавление лота', 'is_auth' => $is_auth, 'user_name' => $user_name, 'user_avatar' => $user_avatar]);
+echo include_template('templates/layout.php', ['content' => $pagecontent, 'title' => 'yeticave - Добавление лота']);

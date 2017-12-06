@@ -8,7 +8,7 @@
             <div class="form__item <?=$classname;?>">
                 <label for="lot-name">Наименование</label>
                 <input value="<?=$value;?>" id="lot-name" type="text" name="lot-name" placeholder="Введите наименование лота">
-                <span class="form__error"><?= isset( $errors['lot-name'] ) ? $errors['lot-name'] : 'Введите наименование лота' ?></span>
+                <span class="form__error"><?=isset( $errors['lot-name'] ) ? $errors['lot-name'] : 'Введите наименование лота' ?></span>
             </div>
             <?php $classname = isset($errors['category']) ? 'form__item--invalid': ''; ?>
             <div class="form__item <?=$classname?>">
