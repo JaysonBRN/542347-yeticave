@@ -8,7 +8,6 @@
         <input value="<?=$value;?>" id="email" type="text" name="email" placeholder="Введите e-mail">
         <span class="form__error"><?=isset($errors['email']) ? $errors['email'] : 'Введите E-mail';?></span>
     </div>
-    <?php var_dump($errors);?>
     <?php $classname = isset($errors['password']) ? 'form_item--invalid' : '';?>
     <div class="form__item form__item--last <?=$classname;?>">
         <label for="password">Пароль*</label>

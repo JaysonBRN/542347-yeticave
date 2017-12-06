@@ -2,8 +2,11 @@
 
 require_once 'data.php';
 require_once 'function.php';
+require_once 'userdata.php';
 
 session_start();
+
+$autorizedUser = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 
 //$is_auth = (bool) rand(0, 1);
 

@@ -21,12 +21,12 @@
         <a class="main-header__add-lot button" href="/add.php">Добавить лот</a>
         <nav class="user-menu">
             <?php 
-            if (isset($_SESSION['user'])): ?>
+            if (isset ($autorizedUser)): ?>
                 <div class="$user-menu__image">
                     <img src="" width="40" height="40" alt="Пользователь">
                 </div>
                 <div class="user-menu__logged">
-            <p><?=strip_tags($_SESSION['user']['name']);?></p>
+            <p><?=strip_tags($autorizedUser['name']);?></p>
                     <a href="logout.php">Выход</a>
                 </div>
             <?php else: ?>

@@ -11,7 +11,7 @@ if (!$lot) {
     $pagecontent = '<h1 style="color: black">Лот с этим ID не найден</h1>';
 } else
 {
-    $pagecontent = include_template( 'templates/lot.php', [ 'lot' => $lot, 'categories' => $categories ] );
+    $pagecontent = include_template( 'templates/lot.php', [ 'lot' => $lot, 'categories' => $categories, 'autorizedUser' => $autorizedUser]);
 }
 
-echo include_template ('templates/layout.php', ['content' => $pagecontent, 'title' => 'yeticave - Главная']);
+echo include_template ('templates/layout.php', ['content' => $pagecontent, 'title' => 'yeticave - Главная', 'autorizedUser' => $autorizedUser]);

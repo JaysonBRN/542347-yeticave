@@ -1,6 +1,5 @@
 <?php
 require_once('app/init.php');
-require_once('userdata.php');
 
 $form = [
     'email' => null,
@@ -45,6 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 else {
     $pagecontent = include_template('templates/login.php', ['form' => $form, 'categories' => $categories, 'errors' => [] ]);
 }
-$layoutcontent = include_template ('templates/layout.php', ['content' => $pagecontent, 'title' => 'yeticave - Вход на сайт']);
+$layoutcontent = include_template ('templates/layout.php', ['content' => $pagecontent, 'title' => 'yeticave - Вход на сайт', 'autorizedUser' => $autorizedUser]);
 
 print ($layoutcontent);

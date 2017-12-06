@@ -1,7 +1,7 @@
 <?php
 require_once( 'app/init.php' );
 
-if (!isset($_SESSION['user'])) {
+if (!isset($autorizedUser)) {
     http_response_code(403);
     exit();
 }
@@ -73,10 +73,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $pagecontent = include_template('templates/add.php', ['lot' => $lot, 'categories' => $categories, 'errors' => $errors]);
     }
     else {
-        $pagecontent = include_template('templates/lot.php', ['lot' => $lot, 'categories' => $categories]);
+        $pagecontent = include_template('templates/lot.php', ['lot' => $lot, 'categories' => $categories, 'autorizedUser' => $autorizedUser]);
     }
 }
 else {
     $pagecontent = include_template('templates/add.php', [ 'lot' => $lot, 'categories' => $categories, 'errors' => [] ]);
 }
-echo include_template('templates/layout.php', ['content' => $pagecontent, 'title' => 'yeticave - Добавление лота']);
+echo include_template('templates/layout.php', ['content' => $pagecontent, 'title' => 'yeticave - Добавление лота', 'autorizedUser' => $autorizedUser]);

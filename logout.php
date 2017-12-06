@@ -1,5 +1,6 @@
 <?php
-session_start();
-$_SESSION = [];
+require_once( 'app/init.php' );
+
+session_destroy();
 header('location: /index.php');
 exit();
