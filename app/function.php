@@ -66,3 +66,19 @@ function timeform($datebet) {
     }
     return ($timediff / 3600) . ' часов назад';
 }
+
+/**
+ * @param string $email
+ * @param array $users
+ * @return bool
+ */
+function searchUserByEmail($email, $users) {
+    $result = null;
+    foreach ($users as $user) {
+        if ($user['email'] == $email) {
+            $result = $user;
+            break;
+        }
+    }
+    return $result;
+}
