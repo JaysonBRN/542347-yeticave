@@ -24,7 +24,7 @@
                         Мин. ставка <span><?=htmlspecialchars(($lot['lot-rate']+$lot['lot-step']));?>р</span>
                     </div>
                 </div>
-                <form class="lot-item__form" action="https://echo.htmlacademy.ru" method="post">
+                <form class="lot-item__form" action="" method="post">
                     <p class="lot-item__form-item">
                         <label for="cost">Ваша ставка</label>
                         <input id="cost" type="number" name="cost" placeholder="<?=($lot['lot-rate']+$lot['lot-step']);?>">

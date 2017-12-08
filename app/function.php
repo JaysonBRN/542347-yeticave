@@ -82,3 +82,37 @@ function searchUserByEmail($email, $users) {
     }
     return $result;
 }
+
+function getAllBets() {
+    if (!isset($_COOKIE['bet'])) {
+        return [];
+    }
+    return json_decode($_COOKIE['bet'], true);
+}
+
+function makeBet($mybet) {
+    $bets = getAllBets();
+    $bets[] = array($mybet);
+    return setcookie('bet', json_encode($bets), strtotime ('+30 days'), '/');
+}
+
+function getBetsByLotId($lotid) {
+    $result = [];
+    foreach (getAllBets() as $bet) {
+        if ($bet['lotid'] == $lotid) {
+            $result[] = $bet;
+        }
+    }
+    return $result;
+}
+
+function getBetsByUserId($userid)
+{
+    $result = [];
+    foreach (getAllBets() as $bet) {
+        if ($bet['userid'] == $userid) {
+            $result[] = $bet;
+        }
+    }
+    return $result;
+}
