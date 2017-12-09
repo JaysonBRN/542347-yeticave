@@ -9,8 +9,11 @@ if (isset($_GET['id'])) {
 }
 
 $lotbetuser = getBetsBylotId($lot['id']);
-
+$showbetform = true;
 foreach ($lotbetuser as &$userinfo) {
+    if ($userinfo['userid'] == $autorizedUser['id']) {
+        $showbetform = false;
+    }
     $user = getUserById($userinfo['userid'], $users);
 
     $userinfo['username'] = $user['name'];
@@ -38,7 +41,12 @@ if (!$lot) {
 }
 else
 {
-    $pagecontent = include_template( 'templates/lot.php', [ 'lot' => $lot, 'lotbetuser' => $lotbetuser, 'categories' => $categories, 'autorizedUser' => $autorizedUser]);
+    $pagecontent = include_template( 'templates/lot.php', [
+        'lot' => $lot,
+        'showbetform' =>$showbetform,
+        'lotbetuser' => $lotbetuser,
+        'categories' => $categories,
+        'autorizedUser' => $autorizedUser]);
 }
 
 echo include_template ('templates/layout.php', ['content' => $pagecontent, 'title' => 'yeticave - Главная', 'autorizedUser' => $autorizedUser]);

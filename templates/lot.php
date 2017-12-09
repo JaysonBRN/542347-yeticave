@@ -24,8 +24,7 @@
                         Мин. ставка <span><?=htmlspecialchars(($lot['lot-rate']+$lot['lot-step']));?>р</span>
                     </div>
                 </div>
-                <?php if (isset($lotbetuser['lotid'])) {
-                        if ($lotbetuser['lotid'] != $lot['id']) { ?>
+                <?php if ($showbetform): ?>
                 <form class="lot-item__form" action="" method="post">
                     <p class="lot-item__form-item">
                         <label for="cost">Ваша ставка</label>
@@ -34,8 +33,7 @@
                     </p>
                     <button type="submit" class="button">Сделать ставку</button>
                 </form>
-                <?php }
-                } ?>
+                <?php endif; ?>
             </div>
             <?php endif; ?>
             <div class="history">
