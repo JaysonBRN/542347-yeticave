@@ -2,7 +2,7 @@
 require_once ('app/init.php');
 $lotbet = getBetsByUserId($autorizedUser['id']);
 
-foreach ( $lotbet as $bet )
+foreach ( $lotbet as &$bet )
 {
     $lot = getLotById( $bet['lotid'], $lots );
     $category = getCategoryById( $lot['category'], $categories );
@@ -14,5 +14,5 @@ foreach ( $lotbet as $bet )
 }
 
 $pagecontent = include_template('templates/mylots.php', ['lotbet' => $lotbet]);
-$layoutcontent = include_template('templates/layout.php', ['content' => $pagecontent, 'title' => 'yeticave - Главная', 'autorizedUser' => $autorizedUser]);
+$layoutcontent = include_template('templates/layout.php', ['content' => $pagecontent, 'title' => 'yeticave - Мои ставки', 'autorizedUser' => $autorizedUser]);
 echo $layoutcontent;
