@@ -62,9 +62,9 @@ function timeform($datebet) {
         return date("d. m. y. H:i:s", $datebet);
     }
     if ($timediff < 3600) {
-        return ($timediff / 60) . ' минут назад';
+        return floor($timediff / 60) . ' минут назад';
     }
-    return ($timediff / 3600) . ' часов назад';
+    return floor($timediff / 3600) . ' часов назад';
 }
 
 /**
@@ -81,4 +81,51 @@ function searchUserByEmail($email, $users) {
         }
     }
     return $result;
+}
+
+function getAllBets() {
+    if (!isset($_COOKIE['bet'])) {
+        return [];
+    }
+    return json_decode($_COOKIE['bet'], true);
+}
+
+function makeBet($mybet) {
+    $bets = getAllBets();
+    $bets[] = $mybet;
+    return setcookie('bet', json_encode($bets), strtotime ('+30 days'), '/');
+}
+
+function getBetsByLotId($lotid) {
+    $result = [];
+    foreach (getAllBets() as $bet) {
+        if ($bet['lotid'] == $lotid) {
+            $result[] = $bet;
+        }
+    }
+    return $result;
+}
+
+function getBetsByUserId($userid)
+{
+    $result = [];
+    foreach (getAllBets() as $bet) {
+        if ($bet['userid'] == $userid) {
+            $result[] = $bet;
+        }
+    }
+    return $result;
+}
+
+function getUserById( $userId, array $users )
+{
+    foreach ( $users as $user )
+    {
+        if ( $user['id'] == $userId )
+        {
+            return $user;
+        }
+    }
+
+    return null;
 }
