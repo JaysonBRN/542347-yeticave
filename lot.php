@@ -1,12 +1,19 @@
 <?php
-require_once( 'app/init.php' );
-
+require_once('app/init.php');
 
 
 $lot = null;
 
 if (isset($_GET['id'])) {
     $lot = getLotById( $_GET['id'], $lots );
+}
+
+$lotbetuser = getBetsBylotId($lot['id']);
+
+foreach ($lotbetuser as &$userinfo) {
+    $user = getUserById($userinfo['userid'], $users);
+
+    $userinfo['username'] = $user['name'];
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -31,7 +38,7 @@ if (!$lot) {
 }
 else
 {
-    $pagecontent = include_template( 'templates/lot.php', [ 'lot' => $lot, 'categories' => $categories, 'autorizedUser' => $autorizedUser]);
+    $pagecontent = include_template( 'templates/lot.php', [ 'lot' => $lot, 'lotbetuser' => $lotbetuser, 'categories' => $categories, 'autorizedUser' => $autorizedUser]);
 }
 
 echo include_template ('templates/layout.php', ['content' => $pagecontent, 'title' => 'yeticave - Главная', 'autorizedUser' => $autorizedUser]);
