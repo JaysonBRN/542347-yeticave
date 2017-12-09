@@ -62,9 +62,9 @@ function timeform($datebet) {
         return date("d. m. y. H:i:s", $datebet);
     }
     if ($timediff < 3600) {
-        return ($timediff / 60) . ' минут назад';
+        return floor($timediff / 60) . ' минут назад';
     }
-    return ($timediff / 3600) . ' часов назад';
+    return floor($timediff / 3600) . ' часов назад';
 }
 
 /**
@@ -92,7 +92,7 @@ function getAllBets() {
 
 function makeBet($mybet) {
     $bets = getAllBets();
-    $bets[] = array($mybet);
+    $bets[] = $mybet;
     return setcookie('bet', json_encode($bets), strtotime ('+30 days'), '/');
 }
 
@@ -115,4 +115,17 @@ function getBetsByUserId($userid)
         }
     }
     return $result;
+}
+
+function getUserById( $userId, array $users )
+{
+    foreach ( $users as $user )
+    {
+        if ( $user['id'] == $userId )
+        {
+            return $user;
+        }
+    }
+
+    return null;
 }
