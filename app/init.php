@@ -4,10 +4,18 @@ require_once 'data.php';
 require_once 'function.php';
 require_once 'userdata.php';
 
-$con = mysqli_connect ('localhost','root', '', 'yeticave');
-if ($con == false) {
-    $pagecontent = mysqli_connect_error();
-    echo include_template('/templates/error.php', ['content' => $pagecontent, 'title' => 'Ошибка подключения к БД']);
+$db = require_once 'db.php';
+
+$link = mysqli_connect($db['host'], $db['user'], $db['password'], $db['database']);
+mysqli_set_charset($link, 'utf8');
+
+$categories = [];
+$content = '';
+
+if (!$link) {
+    $error = mysqli_connect_error();
+    $content = include_template('templates/error.php', ['error' => $error]);
+    echo $layoutcontent - include_template('/templates/layout.php', [['content' => $content, 'title' => 'Ошибка подключения к БД', 'autorizedUser' => $autorizedUser]);
     exit();
 }
 
