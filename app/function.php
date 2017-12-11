@@ -129,3 +129,15 @@ function getUserById( $userId, array $users )
 
     return null;
 }
+
+function getTimeRemaining($dt_over) {
+    $now = strtotime('now');
+    $time_expire = strtotime($dt_over);
+    $days = ($time_expire - $now) % 86400;
+    $daysFull = floor(($time_expire - $now) / 86400);
+    $hours = $days % 3600 ;
+    $hoursFull = floor($days / 3600) ;
+    $minutes = floor($hours / 60) ;
+    $lot_time_remaining = $daysFull . ' days ' . sprintf('%02d', $hoursFull) . ':' . sprintf('%02d', $minutes) ;
+    return $lot_time_remaining;
+}

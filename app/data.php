@@ -101,3 +101,13 @@ $bets = [
     ['name' => 'Евгений', 'price' => 10500, 'ts' => strtotime('-' . rand(25, 50) .' hour')],
     ['name' => 'Семён', 'price' => 10000, 'ts' => strtotime('last week')]
 ];
+
+//lots.id, lots.name, img, initial_price, dt_over, dt_create, user_id, description, bet_step, winner, categories.cat_name
+
+
+
+
+
+
+
+

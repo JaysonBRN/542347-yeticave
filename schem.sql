@@ -1,11 +1,11 @@
 CREATE TABLE users (
-id       INT AUTO_INCREMENT PRIMARY KEY,
-dt_reg   DATETIME(0),
-email    CHAR(48),
-name     CHAR(20),
-pass     CHAR(128),
-avatar   CHAR(48),
-contact  TEXT
+id           INT AUTO_INCREMENT PRIMARY KEY,
+dt_reg       DATETIME(0),
+email        CHAR(48),
+username     CHAR(20),
+pass         CHAR(128),
+avatar       CHAR(48),
+contact      TEXT
 );
 CREATE UNIQUE INDEX email ON users(email);
 CREATE UNIQUE INDEX id ON users(id);
@@ -26,7 +26,7 @@ winner         INT,
 FOREIGN KEY (user_id) REFERENCES users(id)
 ON UPDATE CASCADE
 ON DELETE RESTRICT,
-FOREIGN KEY (cat_id) REFERENCES category(id)
+FOREIGN KEY (cat_id) REFERENCES categories(id)
 ON UPDATE CASCADE
 ON DELETE RESTRICT,
 FOREIGN KEY (winner) REFERENCES users(id)
@@ -40,12 +40,12 @@ CREATE INDEX initial_price ON lots(initial_price);
 CREATE INDEX dt_over ON lots(dt_over);
 CREATE INDEX name ON lots(name);
 
-CREATE TABLE category (
+CREATE TABLE categories (
 id          INT AUTO_INCREMENT PRIMARY KEY,
-name        CHAR(32),
+cat_name    CHAR(32),
 css_class   CHAR(32)
 );
-CREATE UNIQUE INDEX id ON category(id);
+CREATE UNIQUE INDEX id ON categories(id);
 
 CREATE TABLE bets (
 id             INT AUTO_INCREMENT PRIMARY KEY,

@@ -1,56 +1,46 @@
 <?php
 require_once('app/init.php');
 
-
-$lot = null;
-
-if (isset($_GET['id'])) {
-    $lot = getLotById( $_GET['id'], $lots );
+if (!$link) {
+    $error = mysqli_connect_error();
+    $content = include_template('templates/error.php', ['error' => $error]);
 }
-
-$lotbetuser = getBetsBylotId($lot['id']);
-$showbetform = true;
-foreach ($lotbetuser as &$userinfo) {
-    if ($userinfo['userid'] == $autorizedUser['id']) {
-        $showbetform = false;
+else {
+    $sql = 'SELECT id, cat_name, css_class FROM categories';
+    $result = mysqli_query($link, $sql);
+    if ($result) {
+        $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    } else {
+        $error = mysqli_error($link);
+        $content = include_template('templates/error.php', ['error' => $error]);
     }
-    $user = getUserById($userinfo['userid'], $users);
 
-    $userinfo['username'] = $user['name'];
-}
+    $id = intval($_GET['id']);
+    $sql = 'SELECT lots.id, lots.name, img, initial_price, dt_over, dt_create, users.username, description, bet_step, winner, categories.cat_name FROM lots '
+        . 'JOIN categories ON lots.cat_id = categories.id '
+        . 'JOIN users ON lots.user_id = users.id'
+        . 'WHERE lots.id = ' . $id;
+    if ($result = mysqli_query($link, $sql)) {
+        if (!mysqli_num_rows($result)) {
+            http_response_code(404);
+            $content = include_template('templates/error.php', ['error' => 'Лот с этим ID не найден']);
+        }
+        else {
+            $lot = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $cost = (int)$_POST['cost'];
-    $lotbet = [
-        'cost' => $cost,
-        'lotid' => $lot['id'],
-        'time' => time(),
-        'userid' => $autorizedUser['id']
-    ];
+            $sql = 'SELECT lots.id, lots.name, img, description, users.username FROM lots'
+                . 'JOIN users ON lots.user_id = users.id'
+                . 'WHERE cat_id =' . $lot["cat_id"] . 'LIMIT 3';
 
-    if ($cost >= ($lot['lot-rate'] + $lot['lot-step'])) {
-        makeBet($lotbet);
-        header ('location: /mylots.php');
-        exit();
+            $result = mysqli_query($link, $sql);
+
+            $content = include_template('templates/lot.php', ['lot' => $lot, 'result' => $result]);
+        }
+    }
+    else {
+        $error = mysqli_error($link);
+        $content = include_template('templates/error.php', ['error' => $error]);
     }
 }
-
-if (!$lot) {
-    http_response_code (404);
-    $pagecontent = '<h1 style="color: black">Лот с этим ID не найден</h1>';
-}
-else
-{
-    $pagecontent = include_template( 'templates/lot.php', [
-        'lot' => $lot,
-        'showbetform' =>$showbetform,
-        'lotbetuser' => $lotbetuser,
-        'categories' => $categories,
-        'autorizedUser' => $autorizedUser]);
-}
-
-echo include_template ('templates/layout.php', ['content' => $pagecontent, 'title' => 'yeticave - Главная', 'autorizedUser' => $autorizedUser]);
-
-
-
-
+$layoutcontent = include_template ('templates/layout.php', ['content' => $content, 'title' => 'yeticave - Просмотр лота', 'categories' => $categories, 'autorizedUser' => $autorizedUser]);
+print ($layoutcontent);
